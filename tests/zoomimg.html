@@ -39,12 +39,17 @@
     <script type="module" src="../projects/zoomimg/zoomimg.js"></script>
 </head>
 <body>
-    <h1>welcome to my wormy test gallery!</h1>
-    <p>enjoy your stay.</p>
+    <h1>welcome to my wormy test gallery! enjoy your stay.</h1>
+    <p>this gallery has a variety of image sizes, just to show how they scale up and down.</p>
     <p><em>click on an image to get a closer look!</em></p>
 
+    <!--
+        NOTE: to use this script, it is NOT necessary to make a gallery or gallery-item class.
+        ALL that is necessary is the "zoomable" class on the <img> elements!
+     -->
     <div id="gallery">
         <div class="gallery-item">
+            <!-- each image has the "zoomable" class, making it accessible by the script. -->
             <img class="zoomable" src="https://cdn.discordapp.com/attachments/799704269787496518/983860703410671636/cat_wantedposter_1.png" alt="a wanted poster of my cat">
             <span class="caption">my cat is wanted dead or alive!</span>
         </div>

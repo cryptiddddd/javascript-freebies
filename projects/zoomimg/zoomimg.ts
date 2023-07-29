@@ -1,6 +1,8 @@
 
 
 // begin config variables
+const ZOOM_SCALE = 1.0;
+
 const OVERLAY_COLOR = "#000d"; // this can be any color, any format. transparency recommended.
 
 const CLASS_NAME = "zoomable";
@@ -16,7 +18,6 @@ const DISABLE_SCROLL = true;
 let overlay = document.createElement("div");
 overlay.id = OVERLAY_ID;
 
-
 if (AUTOSTYLE) {
     overlay.style.alignItems = "center";
     overlay.style.backgroundColor = OVERLAY_COLOR;
@@ -28,6 +29,7 @@ if (AUTOSTYLE) {
     overlay.style.width = "100vw";
 }
 
+overlay.style.zIndex = "100"; // gotta be on top!
 overlay.style.display = "none"; // default no display!
 
 overlay.onclick = function (event: MouseEvent) {
@@ -37,12 +39,12 @@ overlay.onclick = function (event: MouseEvent) {
 // create empty image child to later be populated.
 let image = document.createElement("img");
 image.id = OVERLAY_IMG_ID;
+image.style.scale = String(ZOOM_SCALE);
 
 overlay.appendChild(image);
 
 // add overlay to the body
 document.body.appendChild(overlay);
-
 
 // onclick function for zoomables.
 (window as any).zoomIn = function (element: HTMLImageElement) {

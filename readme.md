@@ -8,6 +8,7 @@ this repository is intended to provide simple javascript features to neocities b
 current projects:
 - [lastupdated](/projects/lastupdated/): adds an updated timestamp for when your neocities site was last updated.
 - [pagedoll](/projects/pagedoll/): places a random pagedoll on your page from a given list of dolls. 
+    - [ INCOMPLETE! ]
 - [zoomimg](/projects/zoomimg/): adds functionality to enlarge images onclick.
 
 and more to come.
