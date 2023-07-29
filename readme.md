@@ -8,10 +8,9 @@ this repository is intended to provide simple javascript features to neocities b
 current projects:
 - [lastupdated](/projects/lastupdated/): adds an updated timestamp for when your neocities site was last updated.
 - [pagedoll](/projects/pagedoll/): places a random pagedoll on your page from a given list of dolls. 
-    - [ INCOMPLETE! ]
 - [zoomimg](/projects/zoomimg/): adds functionality to enlarge images onclick.
 
-and more to come.
+and more to come?
 
 
 ## how to use
@@ -31,6 +30,14 @@ and more to come.
 
 *please note: be sure to double check your `<script>` element's `src` attribute. `"js/lastupdated.js"` is not custom fit to everyone. to learn more about relative paths, [click here](https://www.w3schools.com/Html/html_filepaths.asp).
 
+
+## resources
+
+i highly recommend learning about [relative paths](https://www.w3schools.com/Html/html_filepaths.asp) and [javascript data types and syntax](https://www.w3schools.com/js/js_datatypes.asp), however it is not required.
+
+further, my setup guides assume you know the basics of html and css. if you do not, [do your homework](https://www.w3schools.com/html/default.asp).
+
+*all of the above links are to w3schools tutorials and walkthroughs. they're very approachable for beginners, and i highly recommend.
 
 ## license
 

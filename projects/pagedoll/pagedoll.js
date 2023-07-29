@@ -1,9 +1,9 @@
+"use strict";
 /**
  * this is a configurable file for adding a "pagedoll" to a corner of your site.
- * 
+ *
  * intended for neocities, but not exclusive to neocities.
  */
-
 // begin config variables
 const PAGEDOLLS = [
     "https://cdn.discordapp.com/attachments/799704269787496518/807425718765355078/agentpurple_square.png",
@@ -28,7 +28,8 @@ const VERTICAL_POS = "bottom";
 let pagedollSrc = PAGEDOLLS[Math.floor(Math.random() * PAGEDOLLS.length)];
 
 // if it's a local path, calculate the directory. 
-if (ENABLE_DIR) pagedollSrc = `${PAGEDOLL_DIR}/${pagedollSrc}`;
+if (ENABLE_DIR)
+    pagedollSrc = `${PAGEDOLL_DIR}/${pagedollSrc}`;
 
 // create an img, assign id, autostyle, place on page.
 let pagedollImg = document.createElement("img");
@@ -39,15 +40,21 @@ if (AUTOSTYLE) {
     pagedollImg.style.position = "fixed";
     pagedollImg.style.width = PAGEDOLL_WIDTH;
     pagedollImg.style.zIndex = "100";
-    
-    // calculate corner position.
-    if (HORIZONTAL_POS === "left") pagedollImg.style.left = "0";
-    else if (HORIZONTAL_POS === "right") pagedollImg.style.right = "0";
-    else console.log("ERROR: horizontal position could not be parsed, please reconfigure in pagedoll.js!");
 
-    if (VERTICAL_POS === "bottom") pagedollImg.style.bottom = "0";
-    else if (VERTICAL_POS === "top") pagedollImg.style.top = "0";
-    else console.log("ERROR: vertical position could not be parsed, please reconfigure in pagedoll.js!");
+    // calculate corner position.
+    if (HORIZONTAL_POS === "left")
+        pagedollImg.style.left = "0";
+    else if (HORIZONTAL_POS === "right")
+        pagedollImg.style.right = "0";
+    else
+        console.log("ERROR: horizontal position could not be parsed, please reconfigure in pagedoll.js!");
+
+    if (VERTICAL_POS === "bottom")
+        pagedollImg.style.bottom = "0";
+    else if (VERTICAL_POS === "top")
+        pagedollImg.style.top = "0";
+    else
+        console.log("ERROR: vertical position could not be parsed, please reconfigure in pagedoll.js!");
 }
 
 document.body.appendChild(pagedollImg);

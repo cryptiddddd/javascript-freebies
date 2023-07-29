@@ -1,4 +1,8 @@
-
+/**
+ * this is a configurable file that makes certain images enlargable!
+ * 
+ * this is a simple script, intended for but not exclusive to neocities.
+ */
 
 // begin config variables
 const ZOOM_SCALE = 1.0;
