@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>freebie! zoomimg example.</title>
+
+    <!-- doing some basic styling for the sake of a nice example. -->
+    <style>
+        #gallery {
+            align-items: baseline;
+            display: flex;
+            flex-flow: row wrap;
+            gap: 2em;
+            justify-content: center;
+            margin: auto;
+            padding: 3em;
+            width: 70%;
+        }
+
+        .gallery-item {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            min-width: 20%;
+        }
+
+        .gallery-item img {
+            max-height: 200px;
+            max-width: 200px;
+        }
+
+        .caption {
+            margin-top: 1ex;
+        }
+    </style>
+
+    <!-- load the js! -->
+    <script type="module" src="../projects/zoomimg/zoomimg.js"></script>
+</head>
+<body>
+    <h1>welcome to my wormy test gallery!</h1>
+    <p>enjoy your stay.</p>
+    <p><em>click on an image to get a closer look!</em></p>
+
+    <div id="gallery">
+        <div class="gallery-item">
+            <img class="zoomable" src="https://cdn.discordapp.com/attachments/799704269787496518/983860703410671636/cat_wantedposter_1.png" alt="a wanted poster of my cat">
+            <span class="caption">my cat is wanted dead or alive!</span>
+        </div>
+
+        <div class="gallery-item">
+            <img class="zoomable" src="https://wormboy3.neocities.org/assets/images/blue_orange_worm.png" alt="a blue and orange worm with a transparent background">
+            <span class="caption">an orange and blue worm i drew :]</span>
+        </div>
+        
+        <div class="gallery-item">
+            <img class="zoomable" src="https://cdn.discordapp.com/attachments/799704269787496518/802016687494135808/color_fence.png" alt="a beautiful sunset behind a chainlink fence">
+            <span class="caption">a beautiful sunset yaay!</span>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://cdn.discordapp.com/attachments/799704269787496518/803164103728168960/itsblueguy_landscape_6x4.png" alt="a little blue guy singing a song" class="zoomable">
+            <span class="caption">a blue guy i drew.</span>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://media.discordapp.net/attachments/799704269787496518/983858258911588402/frog_clownstamp.png" alt="a frog with clowns" class="zoomable">
+            <span class="caption">a beautiful frog and its clown friends.</span>
+        </div>
+    </div>
+
+</body>
+</html>
