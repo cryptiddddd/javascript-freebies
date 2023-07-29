@@ -10,10 +10,8 @@
 const SITE_NAME = "wormboy3"; // your neocities sitename.
 const ELEMENT_ID = "last-updated"; // the id of the element you want the timestamp to go.
 
-
-
-
 // end config variables.
+
 const url = `https://weirdscifi.ratiosemper.com/neocities.php?sitename=${SITE_NAME}`;
 
 interface JSONContent {
