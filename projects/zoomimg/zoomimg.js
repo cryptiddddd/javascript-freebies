@@ -13,6 +13,7 @@ const DISABLE_SCROLL = true;
 // end config variables
 
 // setup: add overlay to the whole page
+const initialOverflow = document.body.style.overflow;
 let overlay = document.createElement("div");
 overlay.id = OVERLAY_ID;
 
@@ -32,6 +33,7 @@ overlay.style.display = "none"; // default no display!
 
 overlay.onclick = function (event) {
     overlay.style.display = "none";
+    document.body.style.overflow = initialOverflow;
 };
 
 // create empty image child to later be populated.

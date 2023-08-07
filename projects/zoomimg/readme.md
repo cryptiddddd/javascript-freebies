@@ -53,3 +53,9 @@ then you should be good to go! for customization, see below documentation:
 this script creates a `<div>` element that [if `AUTOSTYLE` is enabled] covers the entire viewport and centers a child `<img>` element. this `<img>` is empty by default, but assigned an `src` when an image of the `CLASS_NAME` [default: `"zoomable"`] class is clicked on. clicking on an image of this class also makes the overlay visible.
 
 clicking on the overlay, once its visible, sets its `display` to `"none"` again, making it disappear. 
+
+
+---
+# changelog
+
+08/07/2023 -- realized i forgot to revert the body's overflow property onclick, this should now be fixed.
