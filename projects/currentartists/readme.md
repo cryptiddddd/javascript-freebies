@@ -1,3 +1,11 @@
+# IMPORTANT: this does not work currently due to the state of my api 
+
+\* note that this script is perfectly functional on its own, there are matters on my end that are pending. registering with my api **will not grant functional access** quite yet.
+
+you may peruse the rest of this readme, but know that this does not work quite yet......
+
+---
+
 # current top artists
 
 `currentartists.js` fetches *your* top-listened to artists on spotify and displays them on your webpage. because it gets data specific to you, some extra setup is required.
