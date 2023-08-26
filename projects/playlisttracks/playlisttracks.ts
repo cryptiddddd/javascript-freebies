@@ -8,7 +8,7 @@
 const PLAYLIST_ID = "playlist-id-here";
 const ELEMENT_ID = "playlist-tracks"; // the id of the element to place the songs in
 
-const ARTIST_COUNT = 5; // maximum number of artists to display
+const TRACK_COUNT = 5; // maximum number of artists to display
 
 // end config variables
 
@@ -71,7 +71,7 @@ xmlhttp.onload = function(): void {
 }
 
 // directing the request,
-xmlhttp.open('GET', `http://music.wormboy-api.workers.dev/api/playlist/${PLAYLIST_ID}?limit=${ARTIST_COUNT}`); // generate the configured url.
+xmlhttp.open('GET', `http://music.wormboy-api.workers.dev/api/playlist/${PLAYLIST_ID}?limit=${TRACK_COUNT}`); // generate the configured url.
 
 // sending the request!
 xmlhttp.send();

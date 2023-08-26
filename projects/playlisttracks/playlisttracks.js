@@ -54,7 +54,7 @@ xmlhttp.onload = function () {
 };
 
 // directing the request,
-xmlhttp.open('GET', `https://music.wormboy-api.workers.dev/api/playlist/${PLAYLIST_ID}?limit=${TRACK_COUNT}&time_range=${TIME_RANGE}_term`); // generate the configured url.
+xmlhttp.open('GET', `https://music.wormboy-api.workers.dev/api/playlist/${PLAYLIST_ID}?limit=${TRACK_COUNT}`); // generate the configured url.
 
 // sending the request!
 xmlhttp.send();
