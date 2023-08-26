@@ -2,7 +2,9 @@
 
 `currentartists.js` fetches *your* top-listened to artists on spotify and displays them on your webpage. because it gets data specific to you, some extra setup is required.
 
-> see [my documentation](https://wormboy3.neocities.org/docs/music-proxy) here.
+**important note**: you need a spotify account for this one.
+
+> documentation for this api in progress...
 
 > for a code preview, please see [`currentartists.html`](../../tests/currentartists.html) in the `tests` folder.
 
@@ -53,7 +55,7 @@ for troubleshooting, hit f12 and go to "console" for error messages.
 
 ## how does it work?
 
-this script uses an api i wrote to get data specific to you from spotify. it can do more than just retrieving your top artists. for more, [see my documentation](https://wormboy3.neocities.org/docs/music-proxy).
+this script uses an api i wrote to get data specific to you from spotify. it can do more than just retrieving your top artists. documentation for this is in the works! ahhh!!!
 
 but for starters, using this template script, here are the points of customization:
 
@@ -67,7 +69,7 @@ but for starters, using this template script, here are the points of customizati
 
 if you desire further customization [ie: displaying with a different format], that can be done manually by editing the contents of the `displayItems()` function.
 
-if you desire to fetch different data [ie: most recently played tracks, you can change the url to:
+if you desire to fetch different data [ie: most recently played tracks] try changing the url to:
 ```js
 `https://music.wormboy-api.workers.dev/api/${USER_ID}/recently_played?limit=${ARTIST_COUNT}`
 ```
