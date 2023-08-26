@@ -6,6 +6,7 @@ this repository is intended to provide simple javascript features to neocities b
 ## project directory
 
 current projects:
+- [currentartists](/projects/currentartists/): displays spotify data on your page **[new! requires some setup]**
 - [lastupdated](/projects/lastupdated/): adds an updated timestamp for when your neocities site was last updated.
 - [pagedoll](/projects/pagedoll/): places a random pagedoll on your page from a given list of dolls. 
 - [zoomimg](/projects/zoomimg/): adds functionality to enlarge images onclick.
