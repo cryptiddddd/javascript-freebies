@@ -26,13 +26,16 @@ interface ItemData {
 var element = document.getElementById(ELEMENT_ID);
 if (element === null) { console.error("invalid element id, please reconfigure currentartists.js"); }
 
+// callback function
 function displayItems(data: ItemData[]) {
     let list = document.createElement("ol");
 
+    // loop through each piece of data and turn it into items on a list.
     for (let item of data) {
         let newElem = document.createElement("li");
         
         let link = document.createElement("a");
+        // accessing spotify data.
         link.href = item.spotifyURL;
         link.innerText = item.name;
 
@@ -46,11 +49,16 @@ function displayItems(data: ItemData[]) {
 // creating the http request...
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function(): void {
-    let response = JSON.parse(this.responseText);
+    // parse the response text, important! this makes the response into an object we can interact with.
+    let response = JSON.parse(this.responseText); 
     
     // check for success, print error if needed.
     if (response.status == 200) displayItems(response.data.items);
     else console.error(`${response.status}: ${response.message}`);
 }
-xmlhttp.open('GET', `http://music.wormboy-api.workers.dev/api/${USER_ID}/top/${TYPE}?limit=${ARTIST_COUNT}&time_range=${TIME_RANGE}`); // get the configured url.
+
+// directing the request,
+xmlhttp.open('GET', `http://music.wormboy-api.workers.dev/api/${USER_ID}/top/${TYPE}?limit=${ARTIST_COUNT}&time_range=${TIME_RANGE}`); // generate the configured url.
+
+// sending the request!
 xmlhttp.send();

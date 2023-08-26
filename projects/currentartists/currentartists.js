@@ -14,34 +14,50 @@ const TIME_RANGE = "short"; // time range for top
 
 const TYPE = "artists"; // alternate valid type: "tracks"
 
+// end config variables.
+
 // setup: grab the element.
 var element = document.getElementById(ELEMENT_ID);
 if (element === null) {
     console.error("invalid element id, please reconfigure currentartists.js");
 }
 
+// callback function
 function displayItems(data) {
     let list = document.createElement("ol");
+    
     for (let item of data) {
+        
         let newElem = document.createElement("li");
         let link = document.createElement("a");
+
+        // accessing spotify data.
         link.href = item.spotifyURL;
         link.innerText = item.name;
+        
         newElem.appendChild(link);
         list.appendChild(newElem);
     }
+
     element?.replaceChildren(list);
 }
 
 // creating the http request...
 const xmlhttp = new XMLHttpRequest();
 xmlhttp.onload = function () {
+    // parse the response text, important! this makes the response into an object we can interact with.
     let response = JSON.parse(this.responseText);
+    
     // check for success, print error if needed.
     if (response.status == 200)
         displayItems(response.data.items);
+
     else
         console.error(`${response.status}: ${response.message}`);
 };
-xmlhttp.open('GET', `https://music.wormboy-api.workers.dev/api/${USER_ID}/top/${TYPE}?limit=${ARTIST_COUNT}&time_range=${TIME_RANGE}_term`); // get the configured url.
+
+// directing the request,
+xmlhttp.open('GET', `https://music.wormboy-api.workers.dev/api/${USER_ID}/top/${TYPE}?limit=${ARTIST_COUNT}&time_range=${TIME_RANGE}_term`); // generate the configured url.
+
+// sending the request!
 xmlhttp.send();
