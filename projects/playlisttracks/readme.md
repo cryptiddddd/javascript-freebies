@@ -67,7 +67,7 @@ but for starters, using this template script, here are the points of customizati
 | variable name      | data type | purpose                                              | default value      |
 |--------------------|-----------|------------------------------------------------------|--------------------|
 | `PLAYLIST_ID`      | string    | your playlist's spotify id.                          | `"playlist-id-here"`   
-| `ELEMENT_ID`       | string    | id for where you wish to display top artists.        | `"playlist-tracks"`
+| `ELEMENT_ID`       | string    | id for where you wish to display the playlist tracks.        | `"playlist-tracks"`
 | `TRACK_COUNT`      | number    | maximum number of tracks retrieved.                   | `5`
 
 if you desire further customization [ie: displaying with a different format], that can be done manually by editing the contents of the `displayItems()` function.
