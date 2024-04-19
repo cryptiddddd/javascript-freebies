@@ -19,7 +19,7 @@ configuring `ELEMENT_ID` is optional and a matter of personal preference.
 
 ### 2. in your html: decide where your timestamp will go. 
 
-> for an example, see [lastupdated.html](../../tests/lastupdated.html).
+> for an example, see [`lastupdated.html`](../../tests/lastupdated.html).
 
 i suggest creating a `<span>` element, but whatever you use: be aware that *everything* within the element will be overridden by the timestamp text.
 
