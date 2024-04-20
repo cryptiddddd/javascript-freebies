@@ -37,23 +37,11 @@ document.head.append(styleElem);
 /**
  * randomizes the position of the given element.
  */
-function randomize_position(elem) {
-    elem.style.top = Math.random() * 100 + "%";
-    elem.style.left = Math.random() * 100 + "%";
+function randomize_position(e) {
+    e.style.top = Math.random() * 100 + "%";
+    e.style.left = Math.random() * 100 + "%";
 }
 
-/**
- * bring the given element to the front.
- * @param event mouse event
- */
-function bringToFront(ev) {
-    // grab element.
-    var elem = ev.target;
-    if (elem.style.zIndex === "" || topZ - 1 != Number(elem.style.zIndex)) {
-        elem.style.zIndex = "" + topZ;
-        topZ++;
-    }
-}
 
 /**
  * flips an element horizontal style.
@@ -66,6 +54,17 @@ function flip(e) {
         e.style.transform = "scaleX(-1)";
 }
 
+/** recursively disables drag for the given element. */
+function disableDrag(e) {
+    if (e.tagName == "IMG") {
+        e.setAttribute("draggable", "false");
+    }
+    
+    for (let child of e.children) {
+        disableDrag(child);
+    }
+}
+
 
 // events: for each element of the given class, set their reactions to mouse events.
 document.querySelectorAll("." + DRAG_CLASS_NAME).forEach(function (e) {
@@ -76,13 +75,14 @@ document.querySelectorAll("." + DRAG_CLASS_NAME).forEach(function (e) {
     if (ENABLE_DOUBLE_CLICK_FLIP)
         e.ondblclick = function () { return flip(e); };
 
-    // make images non-draggable
-    if (e.tagName == "IMG") {
-        e.setAttribute("draggable", "false");
-    }
-    
+    disableDrag(e);
     // configure events.
-    e.onclick = bringToFront;
+    e.onclick = () => {
+        if (e.style.zIndex === "" || topZ - 1 != Number(e.style.zIndex)) {
+            e.style.zIndex = "" + topZ;
+            topZ++;
+        }
+    };
     e.onmousedown = function (ev) {
         // get element and offset
         current = e;

@@ -62,24 +62,9 @@ document.head.append(styleElem);
 /**
  * randomizes the position of the given element.
  */
-function randomizePosition(elem: HTMLElement): void {
-    elem.style.top = Math.random() * 100 + "%";
-    elem.style.left = Math.random() * 100 + "%";
-}
-
-
-/**
- * bring the given element to the front.
- * @param event mouse event
- */
-function bringToFront(ev: MouseEvent): void {
-    // grab element.
-    const elem = ev.target as HTMLElement;
-
-    if (elem.style.zIndex === "" || topZ - 1 != Number(elem.style.zIndex)) {
-        elem.style.zIndex = "" + topZ;
-        topZ ++;
-    }
+function randomizePosition(e: HTMLElement): void {
+    e.style.top = Math.random() * 100 + "%";
+    e.style.left = Math.random() * 100 + "%";
 }
 
 
@@ -92,6 +77,18 @@ function flip(e: HTMLElement): void {
     else e.style.transform = "scaleX(-1)";
 }
 
+/** recursively disables drag for the given element. */
+function disableDrag(e: HTMLElement): void {
+    if (e.tagName == "IMG") {
+        e.setAttribute("draggable", "false");
+    }
+    
+    // WOOO recursion
+    for (let child of e.children) {
+        disableDrag(child as HTMLElement);
+    }
+}
+
 
 // events: for each element of the given class, set their reactions to mouse events.
 document.querySelectorAll("." + DRAG_CLASS_NAME).forEach((e) => {
@@ -102,13 +99,16 @@ document.querySelectorAll("." + DRAG_CLASS_NAME).forEach((e) => {
     // add events to items
     if (ENABLE_DOUBLE_CLICK_FLIP) (e as HTMLElement).ondblclick = () => flip(e as HTMLElement);
     
-    // make images non-draggable
-    if (e.tagName == "IMG") {
-        e.setAttribute("draggable", "false");
-    }
+    disableDrag(e as HTMLElement);
 
     // configure events.
-    (e as HTMLElement).onclick = bringToFront; 
+    (e as HTMLElement).onclick = () => {
+        // grab element.
+        if ((e as HTMLElement).style.zIndex === "" || topZ - 1 != Number((e as HTMLElement).style.zIndex)) {
+            (e as HTMLElement).style.zIndex = "" + topZ;
+            topZ ++;
+        }
+    }; 
     (e as HTMLElement).onmousedown = (ev: MouseEvent) => {
         // get element and offset
         current = e as HTMLElement;

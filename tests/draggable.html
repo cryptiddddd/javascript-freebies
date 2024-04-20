@@ -17,6 +17,11 @@
             font-style: italic;
             font-size: 1.5ex;
         }
+
+        p.caption {
+            text-align: center;
+            margin: 0;
+        }
     </style>
     
     <!-- load the js! -->
@@ -31,7 +36,12 @@
 
     <img src="https://friends-of-cranebot.pages.dev/files/view/hand.gif" alt="a little hand fella." class="draggable" style="left: 2%">
     <img src="https://friends-of-cranebot.pages.dev/files/view/pink_fish.gif" alt="a pink and magenta fish. it stares at the viewer." class="draggable" style="left: 12%;">
-    <img src="https://friends-of-cranebot.pages.dev/files/view/epic_triangle.png" alt="a little hand fella" class="draggable" style="left: 22%;">
+
+    <!-- alternatively: put your image/content in one draggable div. -->
+    <div class="draggable" style="left: 22%;">
+        <img src="https://friends-of-cranebot.pages.dev/files/view/epic_triangle.png" alt="a little hand fella">
+        <p class="caption">i am a triangle</p>
+    </div>
     <!-- you can use positioning properties to set the default position of elements, if random positions are disabled. -->
 
     <div class="draggable" id="text">
