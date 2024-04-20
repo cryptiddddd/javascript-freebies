@@ -30,7 +30,7 @@ else if (FADE_ON_MOBILE)
 
 // setup: insert styling into page.
 var styleElem = document.createElement("style");
-styleElem.textContent = "\n.".concat(DRAG_CLASS_NAME, " {\n    cursor: grab;\n    position: absolute!important;\n    \n    -webkit-touch-callout: none!important;\n    -webkit-user-select: none!important;\n    -khtml-user-select: none!important;\n    -moz-user-select: none!important;\n    -ms-user-select: none!important;\n    user-select: none!important;\n\n    transition: transform ").concat(FLIP_TIME_SECONDS, "s ease-in-out;\n}\n\n@media (max-width: 800px) {\n    .").concat(DRAG_CLASS_NAME, " { \n        ").concat(mobileStyle, ";\n        z-index: -50;\n    }\n}\n");
+styleElem.textContent = "\n.".concat(DRAG_CLASS_NAME, " {\n    cursor: grab;\n    position: absolute!important;\n    \n    -webkit-touch-callout: none!important;\n    -webkit-user-select: none!important;\n    -khtml-user-select: none!important;\n    -moz-user-select: none!important;\n    -ms-user-select: none!important;\n    user-select: none!important;\n    -webkit-user-drag: none!important;\n    user-drag: none!important;\n\n    transition: transform ").concat(FLIP_TIME_SECONDS, "s ease-in-out;\n}\n\n@media (max-width: 800px) {\n    .").concat(DRAG_CLASS_NAME, " { \n        ").concat(mobileStyle, ";\n        z-index: -50;\n    }\n}\n");
 document.head.append(styleElem);
 
 
@@ -75,6 +75,13 @@ document.querySelectorAll("." + DRAG_CLASS_NAME).forEach(function (e) {
     // add events to items
     if (ENABLE_DOUBLE_CLICK_FLIP)
         e.ondblclick = function () { return flip(e); };
+
+    // make images non-draggable
+    if (e.tagName == "IMG") {
+        e.setAttribute("draggable", "false");
+    }
+    
+    // configure events.
     e.onclick = bringToFront;
     e.onmousedown = function (ev) {
         // get element and offset

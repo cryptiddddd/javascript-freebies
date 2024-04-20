@@ -42,6 +42,8 @@ styleElem.textContent = `
     -moz-user-select: none!important;
     -ms-user-select: none!important;
     user-select: none!important;
+    -webkit-user-drag: none!important;
+    user-drag: none!important;
 
     transition: transform ${FLIP_TIME_SECONDS}s ease-in-out;
 \}
@@ -60,7 +62,7 @@ document.head.append(styleElem);
 /**
  * randomizes the position of the given element.
  */
-function randomize_position(elem: HTMLElement): void {
+function randomizePosition(elem: HTMLElement): void {
     elem.style.top = Math.random() * 100 + "%";
     elem.style.left = Math.random() * 100 + "%";
 }
@@ -94,12 +96,18 @@ function flip(e: HTMLElement): void {
 // events: for each element of the given class, set their reactions to mouse events.
 document.querySelectorAll("." + DRAG_CLASS_NAME).forEach((e) => {
     if (RANDOM_POSITIONS) {
-        randomize_position(e as HTMLElement);
+        randomizePosition(e as HTMLElement);
     }
 
     // add events to items
     if (ENABLE_DOUBLE_CLICK_FLIP) (e as HTMLElement).ondblclick = () => flip(e as HTMLElement);
     
+    // make images non-draggable
+    if (e.tagName == "IMG") {
+        e.setAttribute("draggable", "false");
+    }
+
+    // configure events.
     (e as HTMLElement).onclick = bringToFront; 
     (e as HTMLElement).onmousedown = (ev: MouseEvent) => {
         // get element and offset
