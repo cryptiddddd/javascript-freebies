@@ -78,14 +78,23 @@ function flip(e: HTMLElement): void {
 }
 
 /** recursively disables drag for the given element. */
-function disableDrag(e: HTMLElement): void {
-    if (e.tagName == "IMG") {
+function disableDrag(e: HTMLElement, parent?: HTMLElement): void {
+    if (e.tagName == "IMG" || e.tagName == "A") {
         e.setAttribute("draggable", "false");
+    } 
+    if (e.tagName === "A") {
+        // dbl click navigation
+        (e as HTMLElement).ondblclick = function (ev: MouseEvent) {
+            window.location.href = (e as HTMLAnchorElement).href;
+        };
+        (e as HTMLElement).onclick = function (ev: MouseEvent) {
+            ev.preventDefault();
+        }
     }
     
     // WOOO recursion
-    for (let child of e.children) {
-        disableDrag(child as HTMLElement);
+    for (let child of Array.from(e.children)) {
+        disableDrag(child as HTMLElement, parent === undefined? e : parent);
     }
 }
 
@@ -102,7 +111,9 @@ document.querySelectorAll("." + DRAG_CLASS_NAME).forEach((e) => {
     disableDrag(e as HTMLElement);
 
     // configure events.
-    (e as HTMLElement).onclick = () => {
+    (e as HTMLElement).onclick = (ev: MouseEvent) => {
+        ev.preventDefault();
+
         // grab element.
         if ((e as HTMLElement).style.zIndex === "" || topZ - 1 != Number((e as HTMLElement).style.zIndex)) {
             (e as HTMLElement).style.zIndex = "" + topZ;

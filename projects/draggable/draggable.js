@@ -3,8 +3,6 @@
  *
  * this is a simple script, intended for but not exclusive to neocities.
  */
-
-
 // begin config variables:
 var DRAG_CLASS_NAME = "draggable"; // CANNOT include spaces.
 var RESTRICT_TO_PAGE = true; // keeps the draggables from going offpage
@@ -37,15 +35,14 @@ document.head.append(styleElem);
 /**
  * randomizes the position of the given element.
  */
-function randomize_position(e) {
+function randomizePosition(e) {
     e.style.top = Math.random() * 100 + "%";
     e.style.left = Math.random() * 100 + "%";
 }
 
-
 /**
  * flips an element horizontal style.
- * @param e the element to flip 
+ * @param e the element to flip
  */
 function flip(e) {
     if (e.style.transform === "scaleX(-1)")
@@ -55,13 +52,23 @@ function flip(e) {
 }
 
 /** recursively disables drag for the given element. */
-function disableDrag(e) {
-    if (e.tagName == "IMG") {
+function disableDrag(e, parent) {
+    if (e.tagName == "IMG" || e.tagName == "A") {
         e.setAttribute("draggable", "false");
     }
-    
-    for (let child of e.children) {
-        disableDrag(child);
+    if (e.tagName === "A") {
+        // dbl click navigation
+        e.ondblclick = function (ev) {
+            window.location.href = e.href;
+        };
+        e.onclick = function (ev) {
+            ev.preventDefault();
+        };
+    }
+    // WOOO recursion
+    for (var _i = 0, _a = Array.from(e.children); _i < _a.length; _i++) {
+        var child = _a[_i];
+        disableDrag(child, parent === undefined ? e : parent);
     }
 }
 
@@ -69,20 +76,23 @@ function disableDrag(e) {
 // events: for each element of the given class, set their reactions to mouse events.
 document.querySelectorAll("." + DRAG_CLASS_NAME).forEach(function (e) {
     if (RANDOM_POSITIONS) {
-        randomize_position(e);
+        randomizePosition(e);
     }
     // add events to items
     if (ENABLE_DOUBLE_CLICK_FLIP)
         e.ondblclick = function () { return flip(e); };
-
     disableDrag(e);
+
     // configure events.
-    e.onclick = () => {
+    e.onclick = function (ev) {
+        ev.preventDefault();
+        // grab element.
         if (e.style.zIndex === "" || topZ - 1 != Number(e.style.zIndex)) {
             e.style.zIndex = "" + topZ;
             topZ++;
         }
     };
+
     e.onmousedown = function (ev) {
         // get element and offset
         current = e;
@@ -94,6 +104,7 @@ document.querySelectorAll("." + DRAG_CLASS_NAME).forEach(function (e) {
         // you are now grabbing.
         current.style.cursor = "grabbing";
     };
+
     e.onmouseup = function () {
         current = undefined;
         e.style.removeProperty("cursor");
