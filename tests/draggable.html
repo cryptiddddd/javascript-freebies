@@ -6,6 +6,10 @@
     <title>freebie! draggable example</title>
 
     <style>
+        body {
+            height: 100dvh;
+        }
+        
         div#text {
             padding: 2em 3em;
             color: white;
@@ -22,6 +26,15 @@
             text-align: center;
             margin: 0;
         }
+
+        #drag-zone {
+            position: relative;
+
+            height: 50%;
+            outline: 1px solid white;
+            outline-offset: -1px;
+            margin: 1em;
+        }
     </style>
     
     <!-- load the js! -->
@@ -34,10 +47,21 @@
 
     <p>but oh? what are these? it seems you can click and drag them around the screen! what a happy world.</p>
 
-    <img src="https://friends-of-cranebot.pages.dev/files/view/hand.gif" alt="a little hand fella." class="draggable" style="left: 2%">
-    <img src="https://friends-of-cranebot.pages.dev/files/view/pink_fish.gif" alt="a pink and magenta fish. it stares at the viewer." class="draggable" style="left: 12%;">
+    <!-- this zone is styled with `position: relative`, so all child elements with `position: absolute` can be restricted to this zone if `ENFORCE_LIMITS` is true. -->
+    <section id="drag-zone">
+        <div class="draggable">
+            <img src="https://friends-of-cranebot.pages.dev/files/view/the_goobler.png" alt="the goobler">
+            <p class="caption">i am trapped<br />within a prison!<br />ha hee!</p>
+        </div>
+    </section>
 
-    <!-- alternatively: put your image/content in one draggable div. -->
+    <img src="https://friends-of-cranebot.pages.dev/files/view/hand.gif" alt="a little hand fella." class="draggable">
+    <img src="https://friends-of-cranebot.pages.dev/files/view/pink_fish.gif" alt="a pink and magenta fish. it stares at the viewer." class="draggable">
+
+    <!-- 
+        alternatively: put your image/content in one draggable div. 
+        you can also set an inline style to set a specific starting point.
+    -->
     <div class="draggable" style="left: 22%;">
         <img src="https://friends-of-cranebot.pages.dev/files/view/epic_triangle.png" alt="a little hand fella">
         <p class="caption">i am a triangle</p>

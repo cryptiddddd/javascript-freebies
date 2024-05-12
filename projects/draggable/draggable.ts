@@ -6,7 +6,7 @@
 
 // begin config variables:
 const DRAG_CLASS_NAME = "draggable"; // CANNOT include spaces.
-const RESTRICT_TO_PAGE = true; // keeps the draggables from going offpage
+const ENFORCE_LIMITS = true; // keeps the draggables from going offpage
 
 const FADE_ON_MOBILE = true;
 const HIDE_ON_MOBILE = false;
@@ -63,8 +63,12 @@ document.head.append(styleElem);
  * randomizes the position of the given element.
  */
 function randomizePosition(e: HTMLElement): void {
-    e.style.top = Math.random() * 100 + "%";
-    e.style.left = Math.random() * 100 + "%";
+    const parent = e.offsetParent;
+    
+    console.log("parent width:", parent.clientWidth, "baby width:", e.clientWidth);
+    
+    e.style.top = Math.random() * (parent.clientHeight - e.clientHeight) + "px";
+    e.style.left = Math.random() * (parent.clientWidth - e.clientWidth) + "px";
 }
 
 
@@ -102,7 +106,10 @@ function disableDrag(e: HTMLElement, parent?: HTMLElement): void {
 // events: for each element of the given class, set their reactions to mouse events.
 document.querySelectorAll("." + DRAG_CLASS_NAME).forEach((e) => {
     if (RANDOM_POSITIONS) {
-        randomizePosition(e as HTMLElement);
+        // wait until load because images change sizes when they render.
+        window.addEventListener("load", () => {
+            randomizePosition(e as HTMLElement);
+        }, {once: true});
     }
 
     // add events to items
@@ -120,19 +127,27 @@ document.querySelectorAll("." + DRAG_CLASS_NAME).forEach((e) => {
             topZ ++;
         }
     }; 
+
     (e as HTMLElement).onmousedown = (ev: MouseEvent) => {
+        // only pay attention to left clicks.
+        if (ev.button > 1) {
+            console.log(ev.button);
+            return;
+        }
+
         // get element and offset
         current = e as HTMLElement;
         offsetX = current.offsetLeft - ev.clientX;
         offsetY = current.offsetTop - ev.clientY;
-
+        
         // set limits
-        leftLim = window.innerWidth - current.clientWidth;
-        topLim = window.innerHeight - current.clientHeight;
+        leftLim = current.offsetParent.clientWidth - current.clientWidth;
+        topLim = current.offsetParent.clientHeight - current.clientHeight;
 
         // you are now grabbing.
         current.style.cursor = "grabbing";
     };
+
     (e as HTMLElement).onmouseup = () => {
         current = undefined;
         (e as HTMLElement).style.removeProperty("cursor");
@@ -144,10 +159,10 @@ document.querySelectorAll("." + DRAG_CLASS_NAME).forEach((e) => {
 document.onmousemove = (ev: MouseEvent) => {
     if (current === undefined) return;
 
-    let leftVal = ev.pageX + offsetX;
-    let topVal = ev.pageY + offsetY;
+    let leftVal = ev.pageX + offsetX - scrollX;
+    let topVal = ev.pageY + offsetY - scrollY;
 
-    if (RESTRICT_TO_PAGE) {
+    if (ENFORCE_LIMITS) {
         if (leftVal < 0) leftVal = 0;
         if (topVal < 0) topVal = 0;
         

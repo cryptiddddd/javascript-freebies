@@ -13,7 +13,8 @@ first: download `draggable.js` and upload it to your neocities with your other `
 
 `draggable.js` has six parameters:
 - `DRAG_CLASS_NAME` is the class name you will use for your draggable elements. the default is `"draggable"`. configuring this is optional, i advise to leave as is for simplicity.
-- `RESTRICT_TO_PAGE` keeps the draggable elements from being dragged offscreen. this can be `true` or `false`.
+- `ENFORCE_LIMITS` keeps the draggable elements from being dragged outside of the relative positioning element [your body element, if you use none with `position: relative`]. this can be `true` or `false`.
+    * learn about relative positioning [here](https://css-tricks.com/absolute-relative-fixed-positioining-how-do-they-differ/).
 - `FADE_ON_MOBILE` determines whether to reduce the opacity of draggable elements while on mobile. this can be `true` or `false`. it defaults to `true`.
 - `HIDE_ON_MOBILE` determines whether to hide draggable elements while on mobile. this can be `true` or `false`, and defaults to `false`.
 - `RANDOM_POSITIONS` determines whether draggable elements are scrambled to random positions on page load. this can be `true` or `false`.
